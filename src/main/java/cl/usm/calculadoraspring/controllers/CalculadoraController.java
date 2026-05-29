@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class CalculadoraController {
 
     @Autowired
+    public CalculadoraController(CalculadoraService calculadoraService) {
+        this.calculadoraService = calculadoraService;
+    }
+
     private CalculadoraService calculadoraService;
 
     @PostMapping("/calcular")
-    public ResponseEntity<?> calcular(@RequestBody CalculadoraRequest calculadoraRequest){
+    public ResponseEntity<Object> calcular(@RequestBody CalculadoraRequest calculadoraRequest){
 
         try {
             var res = calculadoraService.calcular(calculadoraRequest.getOperation(),
